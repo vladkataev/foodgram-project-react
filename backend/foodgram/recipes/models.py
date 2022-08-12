@@ -12,7 +12,7 @@ class Tag(models.Model):
     color = models.CharField(
         verbose_name='Цветовой HEX код',
         max_length=7,
-        validators=[RegexValidator(regex='^#([A-Fa-f0-9]{6}$')],
+        validators=[RegexValidator(regex='#([A-Fa-f0-9]{6}$')],
         unique=True
     )
     slug = models.SlugField(
