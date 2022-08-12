@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.db.models import Count
-from .models import (Favorite, Ingredient, Purchase,
-                     Recipe, RecipeIngredient, Subscription,
-                     Tag)
+
+from .models import (Favorite, Ingredient, Purchase, Recipe,
+                     RecipeIngredient, Subscription, Tag)
 
 
 @admin.register(Recipe)

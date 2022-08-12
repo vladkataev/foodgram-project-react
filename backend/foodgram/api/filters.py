@@ -1,6 +1,6 @@
 from django.db.models import Exists, OuterRef
-from rest_framework.filters import BaseFilterBackend, SearchFilter
 from recipes.models import Favorite, Purchase
+from rest_framework.filters import BaseFilterBackend, SearchFilter
 
 
 class RecipeFilter(BaseFilterBackend):
