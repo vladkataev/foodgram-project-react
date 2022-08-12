@@ -9,7 +9,7 @@ services:
     env_file:
       - ./.env
 
-  backend:
+  web:
     image: vladkataev/foodgram:v1
     restart: always
     ports:
@@ -27,7 +27,7 @@ services:
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
-      - backend
+      - web
     
   nginx:
     image: nginx:1.19.3
@@ -40,7 +40,7 @@ services:
       - static_value:/app/static/
       - media_value:/app/media/
     depends_on:
-      - frontend      
+      - web      
 
 volumes:  
   static_value:
