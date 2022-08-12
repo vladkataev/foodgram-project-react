@@ -21,7 +21,7 @@ services:
       - db
 
   frontend:
-    image: vladkataev/foodgram_front:latest
+    image: vladkataev/foodgram_front:v1
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
