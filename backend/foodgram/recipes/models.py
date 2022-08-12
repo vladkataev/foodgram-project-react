@@ -1,9 +1,7 @@
-from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 
-User = get_user_model
+from users.models import User
 
 
 class Tag(models.Model):
@@ -59,7 +57,7 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         verbose_name='Автор рецепта',
         related_name='recipes',
@@ -67,6 +65,7 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(
         Ingredient,
         through='RecipeIngredient',
+        verbose_name='Ингредиент',
         related_name='ing_recipes'
     )
     tags = models.ManyToManyField(
@@ -139,12 +138,12 @@ class RecipeIngredient(models.Model):
 
 class Subscription(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name='author'
     )
     subscribed_to = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name='is_subscribed'
     )
@@ -163,7 +162,7 @@ class Subscription(models.Model):
 
 class Favorite(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name='favorites'
     )
@@ -180,7 +179,7 @@ class Favorite(models.Model):
 
 class Purchase(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name='purchase'
     )

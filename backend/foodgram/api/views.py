@@ -15,9 +15,9 @@ from .filters import IngredientFilter, RecipeFilter
 from .pagination import LimitPageNumberPagination
 from .permissions import OwnerOrReadOnly
 from .serializers import (FavoritesSerializer, IngredientSerializer,
-                           PurchaseSerializer, RecipeListSerializer,
-                           RecipePostSerializer, SubscriptionSerializer,
-                           TagSerializer)
+                          PurchaseSerializer, RecipeListSerializer,
+                          RecipePostSerializer, SubscriptionSerializer,
+                          TagSerializer)
 
 from recipes.models import (Favorite, Ingredient, Purchase, Recipe,
                             RecipeIngredient, Subscription, Tag)
@@ -27,7 +27,7 @@ from users.models import User
 class TagViewSet(mixins.ListModelMixin,
                  mixins.RetrieveModelMixin,
                  viewsets.GenericViewSet):
-    permission_classes = [AllowAny, ]
+    permission_classes = (AllowAny,)
     serializer_class = TagSerializer
     queryset = Tag.objects.all()
 
@@ -35,7 +35,7 @@ class TagViewSet(mixins.ListModelMixin,
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipePostSerializer
-    permission_classes = [OwnerOrReadOnly, ]
+    permission_classes = (OwnerOrReadOnly,)
     filter_backends = (DjangoFilterBackend, RecipeFilter)
     filterset_fileds = ('tags__slug',)
     pagination_class = LimitPageNumberPagination
@@ -114,7 +114,7 @@ class SubscriptionList(generics.ListAPIView):
 
 class SubscribeViewSet(viewsets.ModelViewSet):
     serializer_class = SubscriptionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return Subscription.objects.filter(user=self.request.user)
@@ -148,7 +148,7 @@ class IngredientViewSet(
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     filter_backends = (IngredientFilter, OrderingFilter)
-    permission_classes = [AllowAny, ]    
+    permission_classes = (AllowAny,)
     pagination_class = None
-    search_fields = ['^name']
+    search_fields = ('^name',)
     ordering_fields = ('id',)

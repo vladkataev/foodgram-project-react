@@ -10,9 +10,7 @@ services:
       - ./.env
 
   backend:
-    build: 
-      context: ../backend/foodgram
-      dockerfile: Dockerfile
+    image: vladkataev/foodgram:v1
     restart: always
     ports:
       - "8000:8000"
@@ -25,9 +23,7 @@ services:
       - db
 
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: vladkataev/foodgram_front:v1
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:

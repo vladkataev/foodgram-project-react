@@ -67,21 +67,23 @@ class RecipeListSerializer(serializers.ModelSerializer):
 
     def get_is_favorited(self, obj):
         request = self.context.get('request')
-        if not request or request.user.is_anonymous:
-            return False
-        return Favorite.objects.filter(
-            user=request.user,
-            recipe=obj
-        ).exists()
+        return (
+            not request.user.is_anonymous
+            and Favorite.objects.filter(
+                user=request.user,
+                recipe=obj
+            ).exists()
+        )
 
     def get_is_in_shopping_cart(self, obj):
         request = self.context.get('request')
-        if not request or request.user.is_anonymous:
-            return False
-        return Purchase.objects.filter(
-            user=request.user,
-            recipe=obj
-        ).exists()
+        return (
+            not request.user.is_anonymous
+            and Purchase.objects.filter(
+                user=request.user,
+                recipe=obj
+            ).exists()
+        )
 
 
 class RecipePostSerializer(serializers.ModelSerializer):
@@ -160,21 +162,23 @@ class RecipePostSerializer(serializers.ModelSerializer):
 
     def get_is_favorited(self, obj):
         request = self.context.get('request')
-        if not request or request.user.is_anonymous:
-            return False
-        return Favorite.objects.filter(
-            user=request.user,
-            recipe=obj
-        ).exists()
+        return (
+            not request.user.is_anonymous
+            and Favorite.objects.filter(
+                user=request.user,
+                recipe=obj
+            ).exists()
+        )
 
     def get_is_in_shopping_cart(self, obj):
         request = self.context.get('request')
-        if not request or request.user.is_anonymous:
-            return False
-        return Purchase.objects.filter(
-            user=request.user,
-            recipe=obj
-        ).exists()
+        return (
+            not request.user.is_anonymous
+            and Purchase.objects.filter(
+                user=request.user,
+                recipe=obj
+            ).exists()
+        )
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
