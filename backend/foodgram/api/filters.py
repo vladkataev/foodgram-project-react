@@ -34,7 +34,7 @@ class RecipeFilter(BaseFilterBackend):
             queryset = queryset.filter(is_favor=True)
         if is_in_shopping == '1':
             queryset = queryset.filter(in_cart=True)
-        return
+        return queryset
 
 
 class IngredientFilter(SearchFilter):
